@@ -22,6 +22,7 @@ public class BookController {
         try {
             List<Book> books = bookService.getAllBooks();
             return ResponseEntity.ok("Book from FEATURE branch");
+
         } catch (Exception ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -41,7 +42,7 @@ public class BookController {
     public ResponseEntity deleteBook(@PathVariable("bookId") Long id) {
         try {
             bookService.deleteBook(id);
-            return ResponseEntity.ok("Successfully deleted book!");
+            return ResponseEntity.ok("Deleted book!");
         } catch (Exception ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
