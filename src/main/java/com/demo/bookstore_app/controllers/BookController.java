@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/book")
@@ -97,6 +98,16 @@ public class BookController {
         try {
             List<Book> books = bookService.getBooksByPriceRange(minPrice, maxPrice);
             return ResponseEntity.ok(books);
+        } catch (Exception ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/count-by-genre")
+    public ResponseEntity getBookCountByGenre() {
+        try {
+            Map<String, Long> counts = bookService.getBookCountByGenre();
+            return ResponseEntity.ok(counts);
         } catch (Exception ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
