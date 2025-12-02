@@ -77,9 +77,9 @@ public class BookController {
         try{
             if (title != null) {
                 books = bookService.searchBooksByTitle(title);
-            } else if (author != null) {
-                books = bookService.searchBooksByGenre(genre);
             } else if (genre != null) {
+                books = bookService.searchBooksByGenre(genre);
+            } else if (author != null) {
                 books = bookService.searchBooksByAuthor(author);
             } else {
                 books = bookService.getAllBooks();
@@ -90,4 +90,16 @@ public class BookController {
             return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/price")
+    public ResponseEntity getBooksByPrice(@RequestParam Double minPrice,
+                                          @RequestParam Double maxPrice) {
+        try {
+            List<Book> books = bookService.getBooksByPriceRange(minPrice, maxPrice);
+            return ResponseEntity.ok(books);
+        } catch (Exception ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
