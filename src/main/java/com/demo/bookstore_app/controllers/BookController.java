@@ -61,7 +61,7 @@ public class BookController {
     public ResponseEntity createBook(@RequestBody Book newBook) {
         try {
             Book addedBook = bookService.saveBook(newBook);
-            return new ResponseEntity(null, HttpStatus.CREATED);
+            return new ResponseEntity(addedBook, HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
         }

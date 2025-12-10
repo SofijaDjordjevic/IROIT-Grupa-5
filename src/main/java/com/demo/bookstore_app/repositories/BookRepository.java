@@ -15,6 +15,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthorNameContainingIgnoreCase(String author);
 
     List<Book> findByBookPriceBetween(Double minPrice, Double maxPrice);
-    @Query("SELECT b.bookGenre, COUNT(b) FROM book b GROUP BY b.book_genre")
+    @Query(value = "SELECT b.book_genre, COUNT(b) FROM Book b GROUP BY b.book_genre", nativeQuery = true)
     List<Object[]> countBooksByGenre();
 }
