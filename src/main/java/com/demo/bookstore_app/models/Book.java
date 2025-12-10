@@ -27,6 +27,16 @@ public class Book {
         this.bookGenre = bookGenre;
         this.publishingYear = publishingYear;
     }
+
+    public Book(Long id, String bookName, Double bookPrice, String authorName,
+                String bookGenre, Integer publishingYear) {
+        this.bookId = id;
+        this.bookName = bookName;
+        this.bookPrice = bookPrice;
+        this.authorName = authorName;
+        this.bookGenre = bookGenre;
+        this.publishingYear = publishingYear;
+    }
     public Long getBookId() {
         return bookId;
     }
