@@ -1,3 +1,5 @@
+[![Maven CI](https://github.com/SofijaDjordjevic/IROIT-Grupa-5/actions/workflows/maven.yml/badge.svg)](https://github.com/SofijaDjordjevic/IROIT-Grupa-5/actions/workflows/maven.yml)
+
 📚 Bookstore App 
 
 This project is a simple Spring Boot–based application built as part of a training workflow.
