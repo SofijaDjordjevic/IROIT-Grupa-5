@@ -3,6 +3,7 @@ package com.demo.bookstore_app.service;
 import com.demo.bookstore_app.models.Book;
 import com.demo.bookstore_app.repositories.BookRepository;
 import com.demo.bookstore_app.services.BookService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -60,4 +62,29 @@ public class BookServiceTest {
 
         verify(bookRepository, times(1)).deleteById(id);
     }
+
+    @Test
+    public void testUpdateBook() throws Exception {
+
+        Long bookId = 1L;
+        Book existingBook = new Book();
+        existingBook.setBookId(bookId);
+        existingBook.setBookName("The Little Prince");
+
+        Book updatedDetails = new Book();
+        updatedDetails.setBookName("Vol de nuit");
+
+        when(bookRepository.findById(bookId)).thenReturn(Optional.of(existingBook));
+
+        when(bookRepository.save(any(Book.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        Book result = bookService.updateBook(bookId, updatedDetails);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals("Vol de nuit", result.getBookName());
+
+        verify(bookRepository).findById(bookId);
+        verify(bookRepository).save(existingBook);
+    }
+
 }
