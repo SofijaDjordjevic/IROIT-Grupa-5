@@ -21,7 +21,7 @@ public class BookController {
     public ResponseEntity getAllBooks() {
         try {
             List<Book> books = bookService.getAllBooks();
-            return ResponseEntity.ok("Book from FEATURE branch");
+            return ResponseEntity.ok(books);
 
         } catch (Exception ex) {
             return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

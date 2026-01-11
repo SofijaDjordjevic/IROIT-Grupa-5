@@ -45,3 +45,18 @@ jobs:
       # Stop and remove container
       - name: Stop Docker container
         run: docker stop test-container && docker rm test-container
+
+
+      # Docker Compose
+      - name: Build and start containers
+        run: docker compose up -d --build
+
+      - name: Wait for services
+        run: sleep 30
+
+      - name: Show container status
+        run: docker compose ps
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down
