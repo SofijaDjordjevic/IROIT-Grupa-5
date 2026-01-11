@@ -29,5 +29,19 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: SpringBoot Report               # Name of the folder
+          name: SpringBoot Report
           path: target/surefire-reports/
+
+
+
+      #  Build Docker image
+      - name: Build Docker image
+        run: docker build -t bookstore-app .
+
+      # Run container to test
+      - name: Run Docker container
+        run: docker run -d -p 8088:8088 --name test-container bookstore-app
+
+      # Stop and remove container
+      - name: Stop Docker container
+        run: docker stop test-container && docker rm test-container
